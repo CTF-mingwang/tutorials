@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = AutoconfigurationApplication.class)
 @EnableJpaRepositories(basePackages = { "com.baeldung.autoconfiguration.example" })
@@ -22,6 +25,10 @@ public class AutoconfigurationLiveTest {
     public void whenSaveUser_thenOk() {
         MyUser user = new MyUser("user@email.com");
         userRepository.save(user);
+
+        MyUser userLoaded = userRepository.getOne(user.getEmail());
+        assertNotNull(userLoaded);
+        assertThat(userLoaded).isEqualTo(user);
     }
 
 }
