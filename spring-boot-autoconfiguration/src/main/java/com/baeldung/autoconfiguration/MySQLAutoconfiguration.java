@@ -36,6 +36,9 @@ import org.springframework.util.ClassUtils;
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
 @PropertySource("classpath:mysql.properties")
 public class MySQLAutoconfiguration {
+    String ip = "192.168.151.31";
+    String dbName = "springBootAuto";
+
 
     @Autowired
     private Environment env;
@@ -47,9 +50,9 @@ public class MySQLAutoconfiguration {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/myDb?createDatabaseIfNotExist=true&&serverTimezone=UTC");
-        dataSource.setUsername("mysqluser");
-        dataSource.setPassword("mysqlpass");
+        dataSource.setUrl(String.format("jdbc:mysql://%s:3306/%s?createDatabaseIfNotExist=true&&serverTimezone=UTC", ip, dbName));
+        dataSource.setUsername("root");
+        dataSource.setPassword("123");
 
         return dataSource;
     }
