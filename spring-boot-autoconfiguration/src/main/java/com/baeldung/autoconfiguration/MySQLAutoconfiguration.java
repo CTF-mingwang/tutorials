@@ -38,7 +38,8 @@ import org.springframework.util.ClassUtils;
 public class MySQLAutoconfiguration {
     String ip = "192.168.151.31";
     String dbName = "springBootAuto";
-
+    String userName = "root";
+    String password = "123";
 
     @Autowired
     private Environment env;
@@ -51,8 +52,8 @@ public class MySQLAutoconfiguration {
 
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl(String.format("jdbc:mysql://%s:3306/%s?createDatabaseIfNotExist=true&&serverTimezone=UTC", ip, dbName));
-        dataSource.setUsername("root");
-        dataSource.setPassword("123");
+        dataSource.setUsername(userName);
+        dataSource.setPassword(password);
 
         return dataSource;
     }
